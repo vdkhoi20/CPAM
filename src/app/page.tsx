@@ -55,7 +55,7 @@ export default async function Home() {
           <h1 className="text-4xl md:text-5xl lg:text-5xl font-normal leading-tight mb-8 px-4 flex flex-col items-center">
             <span className="flex items-center gap-2">
               <span className="bg-gradient-to-r from-black via-yellow-400 to-cyan-400 bg-clip-text text-transparent">CPAM</span>
-              <img src={`${basePath}/magic_wand.png`} alt="Eraser" className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 inline-block" />
+              <img src={`${basePath}/magic.png`} alt="Eraser" className="w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 inline-block" />
               <span className="text-cyan-600">: Context-Preserving Adaptive Manipulation</span>
             </span>
             <span className="text-cyan-600">for Zero-Shot Real Image Editing</span>
@@ -112,37 +112,37 @@ export default async function Home() {
           </div>
 
           {/* Action Buttons */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mb-12">
-            <a
-              href="https://arxiv.org/abs/2506.18438"
-              className="px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded border border-slate-500 transition-colors"
-              rel="noopener noreferrer"
-            >
-              arXiv
-            </a>
-            <a
-              href="#"
-              className="px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded border border-slate-500 transition-colors cursor-not-allowed opacity-75 relative"
-              title="Coming soon"
-            >
-              Code
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 py-0.5 rounded-full font-bold transform rotate-12">
-                Soon
-              </span>
-            </a>
-            <a
-              href="#"
-              className="px-6 py-3 bg-slate-600 hover:bg-slate-500 rounded border border-slate-500 transition-colors cursor-not-allowed opacity-75 relative"
-              title="Coming soon"
-            >
-              Gradio Demo
-              <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-1 py-0.5 rounded-full font-bold transform rotate-12">
-                Soon
-              </span>
-            </a>
+         <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
+          {/* arXiv - Đỏ đậm */}
+          <a
+            href="https://arxiv.org/abs/2506.18438"
+            className="px-6 py-2.5 bg-red-700 hover:bg-red-800 text-white rounded-lg font-semibold shadow-md transition-colors flex items-center gap-2"
+            rel="noopener noreferrer"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/></svg>
+            arXiv Paper
+          </a>
 
-      
-          </div>
+          {/* Code - Đen (Github style) */}
+          <a
+            href="#"
+            className="relative px-6 py-2.5 bg-gray-900 text-white rounded-lg font-semibold shadow-md cursor-not-allowed opacity-70 flex items-center gap-2"
+          >
+            <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
+            Code
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">SOON</span>
+          </a>
+
+          {/* Gradio - Cam vàng */}
+          <a
+            href="#"
+            className="relative px-6 py-2.5 bg-yellow-600 text-white rounded-lg font-semibold shadow-md cursor-not-allowed opacity-70 flex items-center gap-2"
+          >
+            <span>🤗</span>
+            Gradio Demo
+            <span className="absolute -top-2 -right-2 bg-red-500 text-white text-[10px] px-1.5 py-0.5 rounded font-bold">SOON</span>
+          </a>
+        </div>
                     {/* Teaser Image - At the very top */}
           <div className="mb-12">
             <img src={`${basePath}/teaser.png`} alt="CPAM Teaser" className="w-full max-w-4xl mx-auto rounded-lg shadow-lg" />
