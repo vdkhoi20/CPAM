@@ -13,13 +13,13 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "PANDORA: Pixel-wise Attention Dissolution and Latent Guidance for Zero-Shot Object Removal",
+  title: "CPAM: Context-Preserving Adaptive Manipulation for Zero-Shot Real Image Editing",
   description:
-    "PANDORA: A zero-shot object removal framework that operates directly on pre-trained diffusion models using Pixel-wise Attention Dissolution and Localized Attentional Disentanglement Guidance.",
+    "Context-Preserving Adaptive Manipulation (CPAM), a novel zero-shot framework for complicated, non-rigid real image editing.",
   icons: {
-    icon: "/eraser.svg",
-    shortcut: "/eraser.svg",
-    apple: "/eraser.svg",
+    icon: "/magic_wand.png",
+    shortcut: "/magic_wand.png",
+    apple: "/magic_wand.png",
   },
 };
 
