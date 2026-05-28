@@ -616,7 +616,7 @@ export default async function Home() {
               </p>
               <div className="flex items-center gap-3">
                 <a
-                  href="https://github.com/vdkhoi20/FocusDiff"
+                  href="https://vdkhoi20.github.io/FocusDiff/"
                   className="inline-block bg-blue-900 text-white px-5 py-2 rounded-lg font-semibold hover:bg-blue-950 transition"
                   target="_blank"
                   rel="noopener noreferrer"

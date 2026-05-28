@@ -60,12 +60,12 @@ python run_cpam.py \
   --output results/cpam_sd21.png
 ```
 
-Run a benchmark-style dataset:
+Run the included IMBA benchmark subset:
 
 ```bash
 python run_cpam.py \
   --version sdxl \
-  --dataset path/to/final_dataset_IMBA \
+  --dataset datasets/final_dataset_IMBA \
   --output results/imba_sdxl \
   --cache-dir path/to/huggingface_cache \
   --local-files-only
@@ -79,10 +79,10 @@ sd21   Stable Diffusion 2.1, 768 x 768, v-prediction DDIM inversion
 sdxl   Stable Diffusion XL, 1024 x 1024
 ```
 
-Dataset mode expects:
+The released dataset lives at `datasets/final_dataset_IMBA` and follows this layout:
 
 ```text
-dataset/
+datasets/final_dataset_IMBA/
 ├── data.json
 ├── images/
 └── masks/
@@ -105,7 +105,7 @@ The live page is available at [vdkhoi20.github.io/CPAM](https://vdkhoi20.github.
 
 - [CPAM Project Page](https://vdkhoi20.github.io/CPAM/)
 - [PANDORA: Pixel-wise Attention Dissolution and Latent Guidance for Zero-Shot Object Removal](https://vdkhoi20.github.io/PANDORA/)
-- [FocusDiff: Target-Aware Refocusing for Tuning-Free Diffusion Editing](https://github.com/vdkhoi20/FocusDiff)
+- [FocusDiff: Target-Aware Refocusing for Tuning-Free Diffusion Editing](https://vdkhoi20.github.io/FocusDiff/)
 
 ## Citation
 
