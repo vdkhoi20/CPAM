@@ -5,6 +5,11 @@ Official code and project page for **CPAM: Context-Preserving Adaptive Manipulat
 [![Project Page](https://img.shields.io/badge/Project-Page-0ea5e9)](https://vdkhoi20.github.io/CPAM/)
 [![arXiv](https://img.shields.io/badge/arXiv-2506.18438-b31b1b)](https://arxiv.org/abs/2506.18438)
 [![Code](https://img.shields.io/badge/Code-GitHub-111827)](https://github.com/vdkhoi20/CPAM)
+[![TMM](https://img.shields.io/badge/Accepted-IEEE%20TMM-emerald)](https://vdkhoi20.github.io/CPAM/)
+
+> **Accepted to IEEE Transactions on Multimedia (TMM).**
+
+![CPAM teaser](public/teaser.png)
 
 CPAM is a tuning-free diffusion editing framework for real images. It preserves context through adaptive self-attention control while localizing prompt-driven changes with mask-guided attention extraction. This release includes a cleaned runner for **Stable Diffusion 1.5**, **Stable Diffusion 2.1**, and **Stable Diffusion XL**.
 
@@ -95,6 +100,20 @@ Each record follows the original ImageEditing schema with fields such as `img_na
 
 The Image Manipulation BenchmArk (IMBA) extends TEdBench with richer annotations for object-level real image editing. It contains 104 editing samples and includes object prompts, alteration masks, and editing preference labels for object retention, object modification, and background alteration.
 
+The latest paper version evaluates CPAM across multiple diffusion backbones. CPAM-SDXL achieves the best background preservation, while CPAM-SD2.1 obtains the best DreamSim score.
+
+| Method | CLIPScore ↑ | LPIPS ↓ | DreamSim ↓ | RMSE ↓ |
+| --- | ---: | ---: | ---: | ---: |
+| CPAM-SD1.5 | 29.26 | 0.180 | 0.072 | 23.42 |
+| CPAM-SD2.1 | 29.08 | 0.125 | **0.044** | 19.13 |
+| CPAM-SDXL | **29.77** | **0.118** | **0.044** | **18.90** |
+
+## Qualitative Results
+
+The qualitative visualization below includes the updated CPAM results for **SD1.5**, **SD2.1**, and **SDXL**.
+
+![CPAM qualitative visualization](public/qualitative_visualization.jpg)
+
 The project page visualizes:
 
 - IMBA dataset construction and annotation design.
@@ -125,11 +144,11 @@ The live page is available at [vdkhoi20.github.io/CPAM](https://vdkhoi20.github.
 If you find this repository useful, please cite CPAM:
 
 ```bibtex
-@article{vo2025cpam,
+@article{vo2026cpam,
   title={CPAM: Context-Preserving Adaptive Manipulation for Zero-Shot Real Image Editing},
   author={Vo, Dinh-Khoi and Do, Thanh-Toan and Nguyen, Tam V. and Tran, Minh-Triet and Le, Trung-Nghia},
-  journal={arXiv preprint arXiv:2506.18438},
-  year={2025},
+  journal={IEEE Transactions on Multimedia},
+  year={2026},
   url={https://arxiv.org/abs/2506.18438},
   code={https://github.com/vdkhoi20/CPAM}
 }

@@ -67,6 +67,14 @@ export default async function Home() {
             vdkhoi@selab.hcmus.edu.vn, toan.do@monash.edu, tamnguyen@udayton.edu, &#123;tmtriet, ltnghia&#125;@fit.hcmus.edu.vn
           </div>
 
+          <div className="mb-8 flex justify-center">
+            <div className="inline-flex flex-col sm:flex-row items-center gap-2 rounded-lg border border-emerald-300 bg-emerald-50 px-6 py-3 text-emerald-900 shadow-sm">
+              <span className="text-sm font-bold uppercase tracking-wide">Accepted</span>
+              <span className="hidden sm:inline h-5 w-px bg-emerald-300" />
+              <span className="text-base md:text-lg font-semibold">IEEE Transactions on Multimedia</span>
+            </div>
+          </div>
+
           {/* Action Buttons */}
          <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
           {/* arXiv - Đỏ đậm */}
@@ -241,12 +249,13 @@ export default async function Home() {
           
           <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-4xl mx-auto">
             Figure shows a qualitative comparison of CPAM against leading state-of-the-art image editing techniques. Our results demonstrate that CPAM consistently outperforms existing methods across various real image editing tasks, including object replacement, view/pose changes, object removal, background alteration, and addition of new objects. CPAM excels in its ability to modify diverse aspects of images while effectively preserving the original background and avoiding unintended modifications to non-target regions.
+            The updated visualization includes CPAM results on SD1.5, SD2.1, and SDXL.
           </p>
 
           {/* Qualitative Comparison Image */}
           <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
             <img
-              src={`${basePath}/qualitative.png`}
+              src={`${basePath}/qualitative_visualization.jpg`}
               alt="Qualitative comparison of object removal methods"
               className="w-full h-auto rounded shadow-lg"
             />
@@ -382,7 +391,7 @@ export default async function Home() {
           <div className="bg-white rounded-lg p-6 border border-gray-200 mb-12">
             <h3 className="text-xl font-semibold text-center mb-4 text-gray-800">Comparison with State-of-the-Art Methods</h3>
             <p className="text-sm text-gray-600 text-center mb-4">
-              Comparison using CLIPScore (measuring text-image alignment) and LPIPS background (evaluating background preservation). <span className="font-bold">Bold</span> indicates best scores, <span className="underline">underline</span> indicates second best.
+              Comparison using CLIPScore for text-image alignment and LPIPS, DreamSim, and RMSE for background preservation. <span className="font-bold">Bold</span> indicates best scores, <span className="underline">underline</span> indicates second best.
             </p>
             <div className="overflow-x-auto">
               <table className="w-full border-collapse text-sm">
@@ -391,59 +400,93 @@ export default async function Home() {
                     <th className="border border-gray-300 px-4 py-2 text-left font-semibold">Method</th>
                     <th className="border border-gray-300 px-4 py-2 text-center font-semibold">CLIPScore ↑</th>
                     <th className="border border-gray-300 px-4 py-2 text-center font-semibold">LPIPS (bg) ↓</th>
+                    <th className="border border-gray-300 px-4 py-2 text-center font-semibold">DreamSim ↓</th>
+                    <th className="border border-gray-300 px-4 py-2 text-center font-semibold">RMSE ↓</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">SDEdit</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">28.19</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">0.338</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.386</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.239</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">57.16</td>
                   </tr>
                   <tr className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">MasaCtrl</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">28.82</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">0.223</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.246</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.121</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">32.51</td>
                   </tr>
                   <tr className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">PnP</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">29.03</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">0.162</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.238</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.075</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">24.36</td>
                   </tr>
                   <tr className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">FPE</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">29.02</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">0.152</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.201</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="underline">0.056</span></td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">22.06</td>
                   </tr>
                   <tr className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">DiffEdit</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">28.58</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">0.148</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.182</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.080</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">35.81</td>
                   </tr>
                   <tr className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">Pix2Pix-Zero</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">27.01</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">0.186</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.229</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.117</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">31.30</td>
                   </tr>
                   <tr className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">LEDITS++</td>
                     <td className="border border-gray-300 px-4 py-2 text-center">28.74</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="font-bold">0.141</span></td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.210</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.104</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">43.30</td>
                   </tr>
                   <tr className="border-b border-gray-200 hover:bg-gray-50">
                     <td className="border border-gray-300 px-4 py-2">Imagic (FT)</td>
                     <td className="border border-gray-300 px-4 py-2 text-center"><span className="font-bold">30.34</span></td>
-                    <td className="border border-gray-300 px-4 py-2 text-center">0.420</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.462</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.286</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">81.55</td>
                   </tr>
                   <tr className="bg-gray-100 border-b-2 border-gray-300 font-semibold">
-                    <td className="border border-gray-300 px-4 py-2">CPAM (Ours)</td>
-                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="underline">29.26</span></td>
-                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="underline">0.149</span></td>
+                    <td className="border border-gray-300 px-4 py-2">CPAM-SD1.5 (Ours)</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">29.26</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.180</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">0.072</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">23.42</td>
+                  </tr>
+                  <tr className="bg-gray-100 border-b-2 border-gray-300 font-semibold">
+                    <td className="border border-gray-300 px-4 py-2">CPAM-SD2.1 (Ours)</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center">29.08</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="underline">0.125</span></td>
+                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="font-bold">0.044</span></td>
+                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="underline">19.13</span></td>
+                  </tr>
+                  <tr className="bg-gray-100 border-b-2 border-gray-300 font-semibold">
+                    <td className="border border-gray-300 px-4 py-2">CPAM-SDXL (Ours)</td>
+                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="underline">29.77</span></td>
+                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="font-bold">0.118</span></td>
+                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="font-bold">0.044</span></td>
+                    <td className="border border-gray-300 px-4 py-2 text-center"><span className="font-bold">18.90</span></td>
                   </tr>
                 </tbody>
               </table>
             </div>
             <p className="text-sm text-gray-700 mt-4 leading-relaxed">
-              CPAM achieves high CLIP score alongside low structure distortion and background preservation, demonstrating superior editing capability.
+              CPAM-SDXL achieves the strongest background preservation, while CPAM-SD2.1 obtains the best DreamSim score, demonstrating that the method generalizes across diffusion backbones.
             </p>
           </div>
 
@@ -709,11 +752,11 @@ export default async function Home() {
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
               <h3 className="text-lg font-semibold text-gray-800 mb-3">CPAM (2025)</h3>
               <pre className="bg-white border border-gray-300 rounded p-4 overflow-x-auto text-sm font-mono text-gray-700">
-{`@article{vo2025cpam,
+{`@article{vo2026cpam,
   title={CPAM: Context-Preserving Adaptive Manipulation for Zero-Shot Real Image Editing},
   author={Vo, Dinh-Khoi and Do, Thanh-Toan and Nguyen, Tam V and Tran, Minh-Triet and Le, Trung-Nghia},
-  journal={arXiv preprint arXiv:2506.18438},
-  year={2025},
+  journal={IEEE Transactions on Multimedia},
+  year={2026},
   url={https://arxiv.org/abs/2506.18438},
   code={https://github.com/vdkhoi20/CPAM}
 }`}
