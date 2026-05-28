@@ -750,7 +750,7 @@ export default async function Home() {
           <div className="space-y-6">
             {/* CPAM Citation */}
             <div className="bg-gray-50 border border-gray-200 rounded-lg p-6">
-              <h3 className="text-lg font-semibold text-gray-800 mb-3">CPAM (2025)</h3>
+              <h3 className="text-lg font-semibold text-gray-800 mb-3">CPAM (IEEE TMM 2026)</h3>
               <pre className="bg-white border border-gray-300 rounded p-4 overflow-x-auto text-sm font-mono text-gray-700">
 {`@article{vo2026cpam,
   title={CPAM: Context-Preserving Adaptive Manipulation for Zero-Shot Real Image Editing},
