@@ -52,3 +52,6 @@ benchmark_outputs/
 test_outputs/
 logs/
 results/
+
+# local paper sources
+Images_in_Paper/

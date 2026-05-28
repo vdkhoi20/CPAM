@@ -1,50 +1,6 @@
-import BeforeAfterSlider from "./components/BeforeAfterSlider";
-import HoverClickGallery from "./components/HoverClickGallery";
-import InteractiveDemo from "./components/InteractiveDemo";
-import QuantitativeTable from "./components/QuantitativeTable";
-import fs from "fs";
-import path from "path";
-
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
 
 export default async function Home() {
-  // Discover all result triplets in public/results at build/render time
-  const resultsDir = path.join(process.cwd(), "public", "results");
-  let galleryItems: { id: string; originalSrc: string; resultSrc: string; maskSrc: string }[] = [];
-  try {
-    const entries = await fs.promises.readdir(resultsDir);
-    const tripletPresence: Record<string, { original: boolean; result: boolean; mask: boolean }> = {};
-
-    const filenamePattern = /^img_(\d+)_(original|result|mask)\.png$/;
-    for (const name of entries) {
-      const match = name.match(filenamePattern);
-      if (!match) continue;
-      const index = match[1];
-      const kind = match[2] as "original" | "result" | "mask";
-      if (!tripletPresence[index]) {
-        tripletPresence[index] = { original: false, result: false, mask: false };
-      }
-      tripletPresence[index][kind] = true;
-    }
-
-    const indices = Object.keys(tripletPresence)
-      .filter((k) => {
-        const t = tripletPresence[k];
-        return t.original && t.result && t.mask;
-      })
-      .map((k) => Number(k))
-      .sort((a, b) => a - b);
-
-    galleryItems = indices.map((i) => ({
-      id: String(i),
-      originalSrc: `/results/img_${i}_original.png`,
-      resultSrc: `/results/img_${i}_result.png`,
-      maskSrc: `/results/img_${i}_mask.png`,
-    }));
-  } catch {
-    galleryItems = [];
-  }
-
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Hero Section */}
@@ -134,6 +90,16 @@ export default async function Home() {
             Code
           </a>
 
+          <a
+            href="https://github.com/vdkhoi20/CPAM/tree/main/datasets/final_dataset_IMBA"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-6 py-2.5 bg-cyan-700 hover:bg-cyan-800 text-white rounded-lg font-semibold shadow-md transition-colors flex items-center gap-2"
+          >
+            <span>▦</span>
+            IMBA Dataset
+          </a>
+
           {/* Gradio - Cam vàng */}
           <a
             href="#"
@@ -157,8 +123,35 @@ export default async function Home() {
           <div className="flex gap-8">
             <h2 className="text-3xl font-bold uppercase min-w-fit">Abstract</h2>
             <p className="text-lg leading-relaxed">
-              Editing natural images using textual descriptions in text-to-image diffusion models remains a significant challenge, particularly in achieving consistent generation and handling complex, non-rigid objects. Existing methods often struggle to preserve textures and identity, require extensive fine-tuning, and exhibit limitations in editing specific spatial regions or objects while retaining background details. This paper proposes Context-Preserving Adaptive Manipulation (CPAM), a novel zero-shot framework for complicated, non-rigid real image editing. Specifically, we propose a preservation adaptation module that adjusts self-attention mechanisms to preserve and independently control the object and background effectively. This ensures that the objects&apos; shapes, textures, and identities are maintained while keeping the background undistorted during the editing process using the mask guidance technique. Additionally, we develop a localized extraction module to mitigate the interference with the non-desired modified regions during conditioning in cross-attention mechanisms. We also introduce various mask-guidance strategies to facilitate diverse image manipulation tasks in a simple manner. Extensive experiments on our newly constructed Image Manipulation BenchmArk (IMBA), a robust benchmark dataset specifically designed for real image editing, demonstrate that our proposed method is the preferred choice among human raters, outperforming existing state-of-the-art editing techniques.
+              Editing natural images using textual descriptions in text-to-image diffusion models remains a significant challenge, particularly in achieving consistent generation and handling complex, non-rigid objects. Existing methods often struggle to preserve textures and identity, require extensive fine-tuning, and exhibit limitations in editing specific spatial regions or objects while retaining background details. This paper proposes Context-Preserving Adaptive Manipulation (CPAM), a novel zero-shot framework for complicated, non-rigid real image editing. Specifically, we propose a preservation adaptation module that adjusts self-attention mechanisms to preserve and independently control the object and background effectively. This ensures that the objects&apos; shapes, textures, and identities are maintained while keeping the background undistorted during the editing process using the mask guidance technique. Additionally, we develop a localized extraction module to mitigate the interference with the non-desired modified regions during conditioning in cross-attention mechanisms. We also introduce various mask-guidance strategies to facilitate diverse image manipulation tasks in a simple manner. CPAM can be integrated with multiple diffusion backbones, including SD1.5, SD2.1, and SDXL, demonstrating strong generalization across model architectures. Extensive experiments on our newly constructed Image Manipulation BenchmArk (IMBA), a robust benchmark dataset specifically designed for real image editing, demonstrate that our proposed method is the preferred choice among human raters, outperforming existing state-of-the-art editing techniques.
             </p>
+          </div>
+        </div>
+      </section>
+
+      {/* IMBA Benchmark Section */}
+      <section className="py-16 px-4 bg-white text-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold uppercase text-center mb-6">IMBA Benchmark</h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-5xl mx-auto text-center">
+            IMBA extends TEdBench with richer annotations for controllable object-level image editing. It augments each sample with object prompts, alteration masks, and explicit editing preference labels, enabling evaluation of object retention, object modification, and background alteration in multi-object real images.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8">
+            <div className="bg-cyan-50 border border-cyan-200 rounded-lg p-5 text-center">
+              <div className="text-3xl font-bold text-cyan-800">104</div>
+              <div className="text-sm uppercase tracking-wide text-cyan-700">Editing Samples</div>
+            </div>
+            <div className="bg-amber-50 border border-amber-200 rounded-lg p-5 text-center">
+              <div className="text-3xl font-bold text-amber-800">43 / 97</div>
+              <div className="text-sm uppercase tracking-wide text-amber-700">Retention / Modification Cases</div>
+            </div>
+            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-5 text-center">
+              <div className="text-3xl font-bold text-emerald-800">7</div>
+              <div className="text-sm uppercase tracking-wide text-emerald-700">Background Alteration Cases</div>
+            </div>
+          </div>
+          <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+            <img src={`${basePath}/IMBA.png`} alt="IMBA benchmark visualization" className="w-full h-auto rounded shadow-lg" />
           </div>
         </div>
       </section>
@@ -221,6 +214,26 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Mechanism Analysis Section */}
+      <section className="py-16 px-4 bg-white text-gray-900">
+        <div className="max-w-6xl mx-auto">
+          <h2 className="text-3xl font-bold uppercase text-center mb-6">Mechanism Analysis</h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-5xl mx-auto text-center">
+            CPAM separates preservation and localized editing by coordinating self-attention and cross-attention. The analysis below highlights how localized extraction reduces prompt leakage into non-target regions and how the attention behavior supports object-level manipulation while preserving scene context.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-center mb-4 text-gray-800">Localized Cross-Attention Extraction</h3>
+              <img src={`${basePath}/Cross_Extraction_marked.png`} alt="Localized cross-attention extraction analysis" className="w-full h-auto rounded shadow" />
+            </div>
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-center mb-4 text-gray-800">Attention Insights</h3>
+              <img src={`${basePath}/insights.png`} alt="CPAM attention insight visualization" className="w-full h-auto rounded shadow" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Qualitative Comparison Section */}
       <section className="py-16 px-4 bg-white text-gray-900">
         <div className="max-w-7xl mx-auto">
@@ -237,6 +250,22 @@ export default async function Home() {
               alt="Qualitative comparison of object removal methods"
               className="w-full h-auto rounded shadow-lg"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Additional Results Section */}
+      <section className="py-16 px-4 bg-gray-100 text-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold uppercase text-center mb-6">Additional Results</h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-5xl mx-auto text-center">
+            CPAM supports diverse editing intents, including object replacement, region-specific manipulation, pose and viewpoint changes, background editing, and addition or removal of objects, while preserving non-target regions.
+          </p>
+          <div className="grid grid-cols-1 gap-6">
+            <div className="bg-white rounded-lg p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-center mb-4 text-gray-800">More Visual Results</h3>
+              <img src={`${basePath}/visualize_more.png`} alt="Additional CPAM qualitative results" className="w-full h-auto rounded shadow-lg" />
+            </div>
           </div>
         </div>
       </section>
@@ -509,6 +538,26 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* Ablation and Study Section */}
+      <section className="py-16 px-4 bg-white text-gray-900">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold uppercase text-center mb-6">Ablation and User Study</h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-5xl mx-auto text-center">
+            Removing Localized Extraction or Preservation Adaptation degrades background preservation and editing stability. The user study further shows that CPAM is preferred for object retention, background retention, and realism.
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-center mb-4 text-gray-800">Module Ablation</h3>
+              <img src={`${basePath}/ablation_study.png`} alt="CPAM ablation study" className="w-full h-auto rounded shadow-lg" />
+            </div>
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-center mb-4 text-gray-800">User Study Ratings</h3>
+              <img src={`${basePath}/statistic_ratings.png`} alt="CPAM user study rating statistics" className="w-full h-auto rounded shadow-lg" />
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Demo Video Section */}
       <section className="py-16 px-4 bg-gray-100 text-gray-900">
         <div className="max-w-4xl mx-auto">
@@ -524,6 +573,30 @@ export default async function Home() {
               <source src={`${basePath}/demo_video.mp4`} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
+          </div>
+        </div>
+      </section>
+
+      {/* Limitations Section */}
+      <section className="py-16 px-4 bg-white text-gray-900 border-t border-gray-200">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl font-bold uppercase text-center mb-6">Limitations</h2>
+          <p className="text-lg text-gray-700 leading-relaxed mb-8 max-w-5xl mx-auto text-center">
+            CPAM remains bounded by the representational capacity of the pretrained diffusion backbone and by mask quality. Large pose or viewpoint changes, imprecise masks, and very small target regions may still produce unstable edits.
+          </p>
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-center mb-4 text-gray-800">Pose and Viewpoint Changes</h3>
+              <img src={`${basePath}/failure_cases_pose_view.png`} alt="Failure cases involving pose and viewpoint changes" className="w-full h-auto rounded shadow" />
+            </div>
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-center mb-4 text-gray-800">Imprecise Masks</h3>
+              <img src={`${basePath}/failure_cases_imprecise_mask.png`} alt="Failure cases involving imprecise masks" className="w-full h-auto rounded shadow" />
+            </div>
+            <div className="bg-gray-50 rounded-lg p-6 border border-gray-200">
+              <h3 className="text-lg font-semibold text-center mb-4 text-gray-800">Small or Specific Regions</h3>
+              <img src={`${basePath}/failure_cases_specific_region.png`} alt="Failure cases involving small or specific regions" className="w-full h-auto rounded shadow" />
+            </div>
           </div>
         </div>
       </section>
@@ -640,7 +713,9 @@ export default async function Home() {
   title={CPAM: Context-Preserving Adaptive Manipulation for Zero-Shot Real Image Editing},
   author={Vo, Dinh-Khoi and Do, Thanh-Toan and Nguyen, Tam V and Tran, Minh-Triet and Le, Trung-Nghia},
   journal={arXiv preprint arXiv:2506.18438},
-  year={2025}
+  year={2025},
+  url={https://arxiv.org/abs/2506.18438},
+  code={https://github.com/vdkhoi20/CPAM}
 }`}
               </pre>
             </div>
@@ -667,6 +742,8 @@ export default async function Home() {
   author = {Vo, Dinh-Khoi and Nguyen, Van-Loc and Nguyen, Tam V. and Tran, Minh-Triet and Le, Trung-Nghia},
   booktitle = {IEEE International Conference on Multimedia and Expo (ICME)},
   year = {2026},
+  url = {https://arxiv.org/abs/2603.27555},
+  code = {https://github.com/vdkhoi20/PANDORA},
 }
 
 @inproceedings{Vo2026DemoICME,
@@ -674,6 +751,8 @@ export default async function Home() {
   author={Dinh-Khoi Vo and Van-Loc Nguyen and Tam V. Nguyen and Minh-Triet Tran and Trung-Nghia Le},
   booktitle={IEEE International Conference on Multimedia and Expo (ICME)},
   year={2026},
+  url = {https://vdkhoi20.github.io/PANDORA/},
+  code = {https://github.com/vdkhoi20/PANDORA},
 }`}
               </pre>
             </div>

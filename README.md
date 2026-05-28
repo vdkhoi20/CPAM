@@ -15,6 +15,7 @@ CPAM is a tuning-free diffusion editing framework for real images. It preserves 
 - Shared configuration and attention-control code with version-specific diffusion backends.
 - Dataset mode compatible with the original IMBA-style benchmark layout.
 - Project page source included under the Next.js app.
+- Paper figures integrated into the project page, including IMBA, mechanism analysis, ablation, user study, and limitations.
 
 ## Repository Layout
 
@@ -90,6 +91,18 @@ datasets/final_dataset_IMBA/
 
 Each record follows the original ImageEditing schema with fields such as `img_name`, `target_text`, `object`, `retain_object`, and optional `alter_mask`.
 
+## IMBA Benchmark
+
+The Image Manipulation BenchmArk (IMBA) extends TEdBench with richer annotations for object-level real image editing. It contains 104 editing samples and includes object prompts, alteration masks, and editing preference labels for object retention, object modification, and background alteration.
+
+The project page visualizes:
+
+- IMBA dataset construction and annotation design.
+- CPAM mechanism analysis for localized cross-attention extraction.
+- Additional qualitative editing results.
+- Ablation results for Localized Extraction and Preservation Adaptation.
+- User study rating statistics and representative failure cases.
+
 ## Project Page
 
 The project page is built with Next.js and exported for GitHub Pages.
@@ -116,7 +129,9 @@ If you find this repository useful, please cite CPAM:
   title={CPAM: Context-Preserving Adaptive Manipulation for Zero-Shot Real Image Editing},
   author={Vo, Dinh-Khoi and Do, Thanh-Toan and Nguyen, Tam V. and Tran, Minh-Triet and Le, Trung-Nghia},
   journal={arXiv preprint arXiv:2506.18438},
-  year={2025}
+  year={2025},
+  url={https://arxiv.org/abs/2506.18438},
+  code={https://github.com/vdkhoi20/CPAM}
 }
 ```
 
@@ -137,6 +152,8 @@ Related work from our group:
   author = {Vo, Dinh-Khoi and Nguyen, Van-Loc and Nguyen, Tam V. and Tran, Minh-Triet and Le, Trung-Nghia},
   booktitle = {IEEE International Conference on Multimedia and Expo (ICME)},
   year = {2026},
+  url = {https://arxiv.org/abs/2603.27555},
+  code = {https://github.com/vdkhoi20/PANDORA},
 }
 
 @inproceedings{Vo2026DemoICME,
@@ -144,5 +161,7 @@ Related work from our group:
   author={Dinh-Khoi Vo and Van-Loc Nguyen and Tam V. Nguyen and Minh-Triet Tran and Trung-Nghia Le},
   booktitle={IEEE International Conference on Multimedia and Expo (ICME)},
   year={2026},
+  url = {https://vdkhoi20.github.io/PANDORA/},
+  code = {https://github.com/vdkhoi20/PANDORA},
 }
 ```
