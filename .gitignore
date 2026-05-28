@@ -23,6 +23,9 @@
 # misc
 .DS_Store
 *.pem
+__pycache__/
+*.py[cod]
+*.egg-info/
 
 # debug
 npm-debug.log*
@@ -43,3 +46,9 @@ next-env.d.ts
 backup_images/
 
 python_scripts/
+
+# generated experiment outputs
+benchmark_outputs/
+test_outputs/
+logs/
+results/
